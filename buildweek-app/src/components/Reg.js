@@ -3,10 +3,6 @@ import * as yup from "yup";
 import axios from "axios";
 
 export default function Register() {
-	const [userName, setUserName] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-
 	const [formState, setFormState] = useState({
 		usename: "",
 		email: "",
@@ -119,9 +115,9 @@ export default function Register() {
 
 	return (
 		<form onSubmit={formSubmit}>
-			{serverError && <p className="error">{serverError}</p>}
 			<div className="form-container">
-				<h3>Register</h3>
+				{serverError && <p className="error">{serverError}</p>}
+				<h2>Register</h2>
 				<label htmlFor="username">
 					<input
 						id="username"
@@ -153,7 +149,7 @@ export default function Register() {
 				<label htmlFor="password">
 					<input
 						id="password"
-						type="text"
+						type="password"
 						name="password"
 						placeholder="Password"
 						value={formState.password}
@@ -163,6 +159,13 @@ export default function Register() {
 						<p className="error">{errors.password}</p>
 					) : null}
 				</label>
+				<button
+					type="submit"
+					className="submit"
+					disabled={buttonIsDisabled}
+				>
+					Submit
+				</button>
 			</div>
 		</form>
 	);
