@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import * as yup from "yup";
 import axios from "axios";
+import * as yup from "yup";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
-export default function Register() {
+export default function LogIn() {
 	const [formState, setFormState] = useState({
-		usename: "",
-		email: "",
+		username: "",
 		password: "",
 	});
+
+	const history = useHistory();
+	const routeToWelcome = (e) => {
+		setTimeout(() => {
+			history.push("/welcome");
+		}, 1000);
+	};
 
 	// TODO server error state
 
@@ -26,7 +33,6 @@ export default function Register() {
 
 	const [errors, setErrors] = useState({
 		username: "",
-		email: "",
 		password: "",
 	});
 
@@ -65,21 +71,16 @@ export default function Register() {
 		setFormState(newFormState);
 	};
 
-	// TODO formSubmit
-
 	const formSubmit = (e) => {
 		e.preventDefault();
 		// ? may need to work a hook in here
 		setFormState({
 			username: "",
-			email: "",
 			password: "",
 		});
 
-		// TODO axios Post
-
-		axios.post(
-			"http://cors-anywhere.herokuapp.com/bwbe.herokuapp.com/api/auth/register",
+		axios.get(
+			"http://cors-anywhere.herokuapp.com/bwbe.herokuapp.com/api/auth/login",
 			formState
 		)
 			.then((res) => {
@@ -89,7 +90,6 @@ export default function Register() {
 				setServerError(null);
 				setFormState({
 					username: "",
-					email: "",
 					password: "",
 				});
 			})
@@ -102,7 +102,6 @@ export default function Register() {
 
 	const formSchema = yup.object().shape({
 		username: yup.string().required("Username is required!"),
-		email: yup.string().email().required("Email is required!"),
 		password: yup.string().required("Password is required"),
 	});
 
@@ -115,13 +114,11 @@ export default function Register() {
 		});
 	}, [formState]);
 
-	// TODO JSX
-
 	return (
 		<FormContainer onSubmit={formSubmit}>
 			<FormInput className="form-container">
 				{serverError && <p className="error">{serverError}</p>}
-				<h2>Register</h2>
+				<h2>Log In</h2>
 				<label htmlFor="username">
 					<input
 						id="username"
@@ -133,20 +130,6 @@ export default function Register() {
 					/>
 					{errors.username.length > 0 ? (
 						<p className="error">{errors.username}</p>
-					) : null}
-				</label>
-
-				<label htmlFor="email">
-					<input
-						id="email"
-						type="text"
-						name="email"
-						placeholder="Email"
-						value={formState.email}
-						onChange={handleChange}
-					/>
-					{errors.email.length > 0 ? (
-						<p className="error">{errors.email}</p>
 					) : null}
 				</label>
 
@@ -167,6 +150,7 @@ export default function Register() {
 					type="submit"
 					className="submit"
 					disabled={buttonIsDisabled}
+					onClick={routeToWelcome}
 				>
 					Submit
 				</button>
