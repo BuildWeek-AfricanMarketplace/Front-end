@@ -120,48 +120,50 @@ export default function Register() {
 	return (
 		<form onSubmit={formSubmit}>
 			{serverError && <p className="error">{serverError}</p>}
+			<div className="form-container">
+				<h3>Register</h3>
+				<label htmlFor="username">
+					<input
+						id="username"
+						type="text"
+						name="username"
+						placeholder="Username"
+						value={formState.username}
+						onChange={handleChange}
+					/>
+					{errors.username.length > 0 ? (
+						<p className="error">{errors.username}</p>
+					) : null}
+				</label>
 
-			<label htmlFor="username">
-				Username
-				<input
-					id="username"
-					type="text"
-					name="username"
-					value={formState.username}
-					onChange={handleChange}
-				/>
-				{errors.username.length > 0 ? (
-					<p className="error">{errors.username}</p>
-				) : null}
-			</label>
+				<label htmlFor="email">
+					<input
+						id="email"
+						type="text"
+						name="email"
+						placeholder="Email"
+						value={formState.email}
+						onChange={handleChange}
+					/>
+					{errors.email.length > 0 ? (
+						<p className="error">{errors.email}</p>
+					) : null}
+				</label>
 
-			<label htmlFor="email">
-				Email
-				<input
-					id="email"
-					type="text"
-					name="email"
-					value={formState.email}
-					onChange={handleChange}
-				/>
-				{errors.email.length > 0 ? (
-					<p className="error">{errors.email}</p>
-				) : null}
-			</label>
-
-			<label htmlFor="password">
-				Password
-				<input
-					id="password"
-					type="text"
-					name="password"
-					value={formState.password}
-					onChange={handleChange}
-				/>
-				{errors.password.length > 0 ? (
-					<p className="error">{errors.password}</p>
-				) : null}
-			</label>
+				<label htmlFor="password">
+					<input
+						id="password"
+						type="text"
+						name="password"
+						placeholder="Password"
+						value={formState.password}
+						onChange={handleChange}
+					/>
+					{errors.password.length > 0 ? (
+						<p className="error">{errors.password}</p>
+					) : null}
+				</label>
+			</div>
 		</form>
 	);
 }
