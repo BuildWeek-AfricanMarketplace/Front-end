@@ -1,9 +1,8 @@
 import React from "react";
 import Register from "./components/Reg";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
 import LogIn from "./components/Login";
 import Welcome from "./components/Welcome";
 // import Home from "./components/Home";
@@ -11,6 +10,9 @@ import Welcome from "./components/Welcome";
 // TODO add routes to homepage & registration/login forms
 // TODO styling for components
 // ? Figure out why marketing page is breaking - link issue?
+// ? Need error for incorrect password, need stop to onClick function
+// ? Create forms for adding items to database
+
 function App() {
 	return (
 		<div className="App">
@@ -23,7 +25,7 @@ function App() {
 				</LinkTo>
 			</NavLinks>
 			<Route path="/login" component={LogIn} />
-			<Route path="register" component={Register} />
+			<Route path="/register" component={Register} />
 			<Route path="/welcome" component={Welcome} />
 			<Register />
 		</div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
@@ -67,6 +68,8 @@ export default function Register() {
 
 	// TODO formSubmit
 
+	const history = useHistory();
+
 	const formSubmit = (e) => {
 		e.preventDefault();
 		// ? may need to work a hook in here
@@ -78,12 +81,9 @@ export default function Register() {
 
 		// TODO axios Post
 
-		axios.post(
-			"http://cors-anywhere.herokuapp.com/bwbe.herokuapp.com/api/auth/register",
-			formState
-		)
+		axios.post("https://bwbe.herokuapp.com/api/auth/register", formState)
 			.then((res) => {
-				console.log("RESPONSE", res);
+				console.log("RESPONSE", res.data);
 				setPost(res.data);
 				console.log("POST", post);
 				setServerError(null);
@@ -92,6 +92,7 @@ export default function Register() {
 					email: "",
 					password: "",
 				});
+				// history.push("/login");
 			})
 			.catch((err) => {
 				setServerError("OOPS! SOMETHING WENT WRONG!");
@@ -103,7 +104,10 @@ export default function Register() {
 	const formSchema = yup.object().shape({
 		username: yup.string().required("Username is required!"),
 		email: yup.string().email().required("Email is required!"),
-		password: yup.string().required("Password is required"),
+		password: yup
+			.string()
+			.required("Password is required!")
+			.min(5, "Password must be at least 5 chars!"),
 	});
 
 	// TODO useEffect

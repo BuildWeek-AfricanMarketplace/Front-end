@@ -71,27 +71,14 @@ export default function LogIn() {
 		setFormState(newFormState);
 	};
 
-	const formSubmit = (e) => {
+	const formSubmit = async (e) => {
 		e.preventDefault();
 		// ? may need to work a hook in here
-		setFormState({
-			username: "",
-			password: "",
-		});
 
-		axios.get(
-			"http://cors-anywhere.herokuapp.com/bwbe.herokuapp.com/api/auth/login",
-			formState
-		)
+		axios.post("https://bwbe.herokuapp.com/api/auth/login", formState)
 			.then((res) => {
-				console.log("RESPONSE", res);
-				setPost(res.data);
-				console.log("POST", post);
+				console.log("RESPONSE", res.data);
 				setServerError(null);
-				setFormState({
-					username: "",
-					password: "",
-				});
 			})
 			.catch((err) => {
 				setServerError("OOPS! SOMETHING WENT WRONG!");
@@ -150,7 +137,7 @@ export default function LogIn() {
 					type="submit"
 					className="submit"
 					disabled={buttonIsDisabled}
-					onClick={routeToWelcome}
+					// onClick={routeToWelcome}
 				>
 					Submit
 				</button>
