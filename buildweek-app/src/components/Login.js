@@ -78,6 +78,9 @@ export default function LogIn() {
 		axios.post("https://bwbe.herokuapp.com/api/auth/login", formState)
 			.then((res) => {
 				console.log("RESPONSE", res.data);
+				window.sessionStorage.setItem("token", res.data.token);
+				window.sessionStorage.setItem("user", res.data.id);
+				history.push(`/user/${res.data.id}`);
 				setServerError(null);
 			})
 			.catch((err) => {

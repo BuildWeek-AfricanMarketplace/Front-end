@@ -12,6 +12,7 @@ import Welcome from "./components/Welcome";
 // ? Figure out why marketing page is breaking - link issue?
 // ? Need error for incorrect password, need stop to onClick function
 // ? Create forms for adding items to database
+// ? Figure out userProfile and serviceWorker components (needed?)
 
 function App() {
 	return (
