@@ -81,7 +81,10 @@ export default function Register() {
 
 		// TODO axios Post
 
-		axios.post("https://bwbe.herokuapp.com/api/auth/register", formState)
+		axios.post(
+			"https://africanmarketplace199.herokuapp.com/api/auth/register",
+			formState
+		)
 			.then((res) => {
 				console.log("RESPONSE", res.data);
 				setPost(res.data);

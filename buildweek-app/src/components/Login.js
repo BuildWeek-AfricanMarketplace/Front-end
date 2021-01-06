@@ -75,7 +75,10 @@ export default function LogIn() {
 		e.preventDefault();
 		// ? may need to work a hook in here
 
-		axios.post("https://bwbe.herokuapp.com/api/auth/login", formState)
+		axios.post(
+			"https://africanmarketplace199.herokuapp.com/api/auth/login",
+			formState
+		)
 			.then((res) => {
 				console.log("RESPONSE", res.data);
 				window.sessionStorage.setItem("token", res.data.token);
